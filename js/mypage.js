@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const user_id = Cookies.get('user_id');
     const company_id = Cookies.get('company_id');
 
-    axios.get(`https://54.180.251.177/users/mypage/${user_id}`)
+    axios.get(`http://54.180.251.177:3000/users/mypage/${user_id}`)
         .then((result) => {
             console.log(result.data);
             const firstName = result.data.firstName;
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
             dropPayday.innerHTML = payday;
 
             // 회사 가져오기 => 회사 이름
-            axios.get(`https://54.180.251.177/companies/${company}`)
+            axios.get(`http://54.180.251.177:3000/companies/${company}`)
                 .then((result) => {
                     let companyName;
 
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     // 글 목록 가져오기 => 글 개수
-    axios.get(`https://54.180.251.177/diaries/${user_id}`)
+    axios.get(`http://54.180.251.177:3000/diaries/${user_id}`)
         .then((result) => {
             const spanRecordCount = document.getElementById('record-count');
             spanRecordCount.innerHTML = result.data.length;
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     // 회사 list 가져오기 => 회사 dropdown
-    axios.get(`https://54.180.251.177/companies/`)
+    axios.get(`http://54.180.251.177:3000/companies/`)
         .then((result) => {
             const optionList = document.getElementById('option-list');
             const data = result.data;
@@ -174,7 +174,7 @@ function editMemberInfo() {
     let companyId;
 
     // 회사 list 가져오기 => 회사 dropdown
-    axios.get(`https://54.180.251.177/companies`)
+    axios.get(`http://54.180.251.177:3000/companies`)
         .then((result) => {
             const optionList = document.getElementById('option-list');
             const data = result.data;
@@ -202,7 +202,7 @@ function editMemberInfo() {
             let goodStateCount;
             // 기존 user 정보 가져오기
             $.support.cors = true;
-            axios.get(`https://54.180.251.177/users`)
+            axios.get(`http://54.180.251.177:3000/users`)
                 .then(async (result) => {
                     console.log("result"+result.data);
                     const data = result.data;
@@ -235,7 +235,7 @@ function editMemberInfo() {
             }
 
             $.support.cors = true;
-            axios.put(`https://54.180.251.177/users/mypage/${user_id}`, req)
+            axios.put(`http://54.180.251.177:3000/users/mypage/${user_id}`, req)
                 .then(async (result) => {
                     Cookies.set("company_id", companyId);
                     const selectedCompany = data.find(company => company.id === companyId);

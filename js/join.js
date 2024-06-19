@@ -121,7 +121,7 @@ async function signUp() {
   if (company !== 'Others') {
     console.log("company가 Others가 아닙니다. ");
     try {
-      await axios.get(`https://54.180.251.177/companies/name/${company}`)
+      await axios.get(`http://54.180.251.177:3000/companies/name/${company}`)
         .then((result) => {
           companyId = result.data.id;
           console.log(companyId);
@@ -164,14 +164,14 @@ async function signUp() {
 
     $.support.cors = true;
 
-    await axios.post('https://54.180.251.177/users/join', param, {
+    await axios.post(`http://54.180.251.177:3000/users/join`, param, {
       headers: {
         'Content-Type': 'application/json'
       }
     }).then(async function () {
       if (company === 'Others') {
         try {
-          const result = await axios.post('https://54.180.251.177/companies', {
+          const result = await axios.post(`http://54.180.251.177:3000/companies`, {
             "name": newCompanyName,
             "image": "basic-img.svg",
             "total_good_state_count": 0
@@ -193,7 +193,7 @@ async function signUp() {
 
 function getCompaniesList() {
   // 회사 list 가져오기 => 회사 dropdown
-  axios.get(`https://54.180.251.177/companies`)
+  axios.get(`http://54.180.251.177:3000/companies`)
     .then((result) => {
       const optionList = document.getElementById('company-list');
       const data = result.data;

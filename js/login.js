@@ -1,5 +1,4 @@
 /* API 연동 */
-
 function login() {
   let email = $("#email").val();
   let pw = $("#password").val();
@@ -9,7 +8,7 @@ function login() {
     "password": pw
   }
 
-  axios.post(`https://54.180.251.177/users/login`, req)
+  axios.post(`http://54.180.251.177:3000/users/login`, req)
     .then((result) => {
       Cookies.set("user_id", result.data.id);
       Cookies.set("company_id", result.data.company);
