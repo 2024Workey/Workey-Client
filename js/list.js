@@ -88,7 +88,7 @@ async function getDiaryHtml(id, quesId, companyId, date, isStar, score) {
             starImg = `<img src="./img/icon_filled_star_list.svg" class="important" alt="즐겨찾기">`;
         }
         let question = await getQuestion(quesId);// 질문 가져오기
-        let company = await getCompany(companyId);// 회사 가져오기 
+        let company = await getCompany(companyId);// 회사 가져오기
 
         let dateFormat = await getTodayDate(String(date), quesId);// 작성된 날짜 포맷 가져오기
 
@@ -116,7 +116,7 @@ async function getDiaryHtml(id, quesId, companyId, date, isStar, score) {
 async function getQuestion(quesId) {
     let question = '';
 
-    await axios.get(`https://54.180.251.177/questions/${quesId}`)
+    await axios.get(`http://54.180.251.177:3000/questions/${quesId}`)
         .then(async (result) => {
             question = result.data;
         }).catch((err) => {
@@ -124,10 +124,10 @@ async function getQuestion(quesId) {
         });
     return question;
 }
-// 회사 이름 가져오기 
+// 회사 이름 가져오기
 async function getCompany(companyId) {
     let company;
-    await axios.get(`https://54.180.251.177/companies/${companyId}`)
+    await axios.get(`http://54.180.251.177:3000/companies/${companyId}`)
         .then(async (result) => {
             company = result.data.name;
         }).catch(async (err) => {
@@ -151,7 +151,7 @@ async function getTodayDate(date, quesId) {
 showDiaries();
 async function showDiaries() {
     let userId = Cookies.get("user_id");
-    await axios.get(`https://54.180.251.177/diaries/${userId}`)
+    await axios.get(`http://54.180.251.177:3000/diaries/${userId}`)
         .then(async (result) => {
             await result.data.forEach(async (element) => {
                 // 작성된 달의 인덱스 구하기
@@ -189,7 +189,7 @@ async function findIncludedWord(input) {
     input = String(input).replaceAll(" ", "");
     console.log("input1: "+input);
 
-    await axios.get(`https://54.180.251.177/diaries/${userId}`)
+    await axios.get(`http://54.180.251.177:3000/diaries/${userId}`)
         .then(async (result) => {
             await result.data.forEach(async (element) => {
                 let index = Number(element.createdAt.substring(5, 7)) - 1;
@@ -208,7 +208,7 @@ async function findIncludedWord(input) {
 // 제목으로 검색하기
 async function search(id) {
     let userId = Cookies.get("user_id");
-    await axios.get(`https://54.180.251.177/diaries/${userId}`)
+    await axios.get(`http://54.180.251.177:3000/diaries/${userId}`)
         .then(async (result) => {
             await result.data.forEach(async (element) => {
                 if (id === element.id) {
@@ -239,7 +239,7 @@ function deleteDivList() {
 // async function showDiaryByDate() {
 //     const selectedDate = selectDate.value;
 //     console.log(selectDate)
-    
+
 //     await axios.get(`http://54.180.251.177/diaries/date/detail?date=${selectedDate}`)
 //         .then(async (result) => {
 //             await setDiaryHtml(result.id, result.quesId, result.companyId, result.createdAt, result.star);

@@ -22,7 +22,7 @@ let endTimestamp
 
 document.addEventListener('DOMContentLoaded', () => {
   user_id = Cookies.get("user_id");
-  axios.get(`https://54.180.251.177/main/${user_id}`)
+  axios.get(`http://54.180.251.177:3000/main/${user_id}`)
     .then((result) => {
       const startTime = result.data.startTime
       // console.log(parseInt(startTime))
@@ -99,7 +99,7 @@ function increaseProgressBar(startTimestamp, endTimestamp) {
 
     // 말풍선
     comment1.textContent = "Hustling until it's time to punch out!";
-    comment2.textContent = "You can do it✨";
+    comment2.textContent = "You can do it💫";
   } else {
     clearInterval(progressInterval);
     timeBar.style.width = '100%';
@@ -112,7 +112,7 @@ function increaseProgressBar(startTimestamp, endTimestamp) {
 
     // 말풍선
     comment1.textContent = "You did an amazing job today!";
-    comment2.textContent = "Well done✨";
+    comment2.textContent = "Well done💫";
   }
 
 }
@@ -152,7 +152,7 @@ function isClicked(element) {
     timeBar.style.backgroundImage = "linear-gradient(to left, var(--purple-02) 20%, var(--purple-08) 60%)";
     // 말풍선 코멘트 변경
     comment1.textContent = "The quality of life is rising!";
-    comment2.textContent = "Let’s have a good rest✨";
+    comment2.textContent = "Let’s have a good rest💫";
   } else {
     progressInterval = setInterval(() => increaseProgressBar(startTimestamp, endTimestamp), 1000);
   }
